@@ -1,0 +1,28 @@
+.navbar {
+    width: 100%;
+}
+body {
+    text-align: center;
+}
+.navbar{
+    position: absolute;
+    /* text-align: center; */
+}
+
+h1 {
+    /* text-align: center; */
+    margin: 0em;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+a{
+    float: left;
+}
+
+h4 {
+    /* text-align: center; */
+    margin: 0;
+    margin-left: 4.5%;
+    font-size: 12px;
+}

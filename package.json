@@ -1,0 +1,26 @@
+{
+  "name": "henrys-garage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.0",
+    "express-session": "^1.16.1",
+    "three": "^0.120.1",
+    "three-gltf-loader": "^1.111.0",
+    "three-gltf-loader-wtower": "^1.112.2",
+    "threex.domevents": "^1.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}
