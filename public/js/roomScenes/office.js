@@ -18,7 +18,7 @@ function startStoreRoom() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 5.5;
   camera.position.y = 1.7;
-  camera.position.x = 1;
+  camera.position.x = -0.5;
 
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -109,47 +109,6 @@ function startStoreRoom() {
   }, false);
 
   // --------------------------------------------------------------------------------
-  // Add a todo element
-  // --------------------------------------------------------------------------------
-
-  // const officeMaterial = new THREE.MeshBasicMaterial({ wireframe: false });
-  // const officeGeometry = new THREE.PlaneGeometry(5, 2.5, 1);
-  // const officeMesh = new THREE.Mesh(officeGeometry, officeMaterial);
-  // officeMesh.position.set(1.4, 1.6, -0.85);
-  // townScene.add(officeMesh);
-
-  // const moveMaterial = new THREE.MeshBasicMaterial({ wireframe: false });
-  // const moveGeometry = new THREE.PlaneGeometry(9, 4, 1);
-  // const moveMesh = new THREE.Mesh(moveGeometry, moveMaterial);
-  // moveMesh.position.set(0, 1.7, -.9);
-  // townScene.add(moveMesh);
-
-  // const element = document.createElement("div");
-  // const iframe = document.createElement("iframe");
-  // iframe.src = "../../html-tasks/storeTodo.html";
-  // iframe.style.width = "400px";
-  // iframe.style.height = "160px";
-  // element.appendChild(iframe);
-
-  // const domObject = new CSS3DObject(element);
-  // domObject.scale.set(.009, .009, .009);
-  // officeMesh.add(domObject);
-
-
-
-  // --------------------------------------------------------------------------------
-  // Lock controls when focused on todo list
-  // --------------------------------------------------------------------------------
-
-  // domEvents2.addEventListener(officeMesh, "mouseover", () => {
-  //   controls.activeLook = false;
-  // }, false);
-
-  // domEvents2.addEventListener(moveMesh, "mouseover", () => {
-  //   controls.activeLook = true;
-  // }, false);
-
-  // --------------------------------------------------------------------------------
   // Resize Update/ Re-render
   // --------------------------------------------------------------------------------
 
@@ -173,8 +132,8 @@ function startStoreRoom() {
       camera.position.x = 4;
     } else if (camera.position.z > 5.8) {
       camera.position.z = 5.8;
-    } else if (camera.position.z < .5) {
-      camera.position.z = .5;
+    } else if (camera.position.z < 5.2) {
+      camera.position.z = 5.2;
     } else if (camera.position.y < 1.7 || camera.position.y > 1.7) {
       camera.position.y = 1.7;
     }

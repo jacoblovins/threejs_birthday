@@ -6,7 +6,7 @@ body {
 }
 .navbar{
     position: absolute;
-    /* text-align: center; */
+    text-align: center;
 }
 
 h1 {
@@ -23,6 +23,6 @@ a{
 h4 {
     /* text-align: center; */
     margin: 0;
-    margin-left: 4.5%;
+    /* margin-left: 4.5%; */
     font-size: 12px;
 }

@@ -18,7 +18,7 @@ function startStoreRoom() {
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 5.5;
   camera.position.y = 1.7;
-  camera.position.x = 1;
+  camera.position.x = 3;
 
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -168,8 +168,8 @@ function startStoreRoom() {
   // --------------------------------------------------------------------------------
   
   const animate = function () {
-    if(camera.position.x < -1){
-      camera.position.x = -1;
+    if(camera.position.x < 2){
+      camera.position.x = 2;
     } else if(camera.position.x > 4){
       camera.position.x = 4;
     } else if(camera.position.z > 5.8){

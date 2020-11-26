@@ -19,7 +19,7 @@ function startTown() {
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.z = 2;
+  camera.position.z = 8;
   camera.position.y = 2;
 
   const renderer = new THREE.WebGLRenderer();
@@ -94,9 +94,9 @@ function startTown() {
   fontLoader.load("../fonts/Roboto_Bold.json", (font) => {
 
     // Office
-    const officeText = new THREE.TextGeometry("Uncle Jake's Garage", {
+    const officeText = new THREE.TextGeometry("Jake's Garage", {
       font: font,
-      size: .65,
+      size: .7,
       height: .1,
       curveSegments: 12,
     });
@@ -106,7 +106,7 @@ function startTown() {
       roughness: 0.5,
       side: THREE.DoubleSide
     }));
-    officeMesh.position.set(10.9, 6, -11);
+    officeMesh.position.set(12, 7, -11);
     officeMesh.rotation.y = Math.PI * 180;
     scene.add(officeMesh);
 
@@ -124,10 +124,22 @@ function startTown() {
       roughness: 0.5,
       side: THREE.DoubleSide
     }));
-    storeMesh.position.set(-3.2, 6, -11.5);
+    storeMesh.position.set(-3.2, 7, -11.5);
     storeMesh.rotation.y = Math.PI * 180;
     scene.add(storeMesh);
   });
+
+  // --------------------------------------------------------------------------------
+  // Chick Fil A sign
+  // --------------------------------------------------------------------------------  
+
+  const texture = new THREE.TextureLoader().load( '../../img/logo.jpg' );
+  const chickMaterial = new THREE.MeshBasicMaterial({ map: texture });
+  const chickGeometry = new THREE.PlaneGeometry(3.3, 1.9, 1);
+  const chickMesh = new THREE.Mesh(chickGeometry, chickMaterial);
+  chickMesh.rotation.y = 90 * Math.PI / 180;
+  chickMesh.position.set(-11.4, 4.95, 8.25);
+  scene.add(chickMesh);
 
   // --------------------------------------------------------------------------------
   // Clickable doors
