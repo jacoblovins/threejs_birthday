@@ -12,8 +12,27 @@ function startStoreRoom() {
   // Initial scene setup and render to the HTML page
   // --------------------------------------------------------------------------------
 
+  const section = document.createElement("section");
+  const loadingDiv = document.createElement("div");
+  section.setAttribute("id", "loading-screen");
+  loadingDiv.setAttribute("id", "loader");
+  section.appendChild(loadingDiv)
+  document.body.appendChild(section)
+
+
   const clock = new THREE.Clock();
   const townScene = new THREE.Scene();
+  const loadingScreen = document.getElementById('loading-screen');
+  document.body.append(loadingScreen)
+
+  const loadingManager = new THREE.LoadingManager(() => {
+
+    loadingScreen.classList.add('fade-out');
+
+    // optional: remove loader from DOM via event listener
+    loadingScreen.addEventListener('transitionend', onTransitionEnd);
+
+  });
 
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 5.5;
@@ -41,7 +60,7 @@ function startStoreRoom() {
   // --------------------------------------------------------------------------------
 
   const controls = new FirstPersonControls( camera, renderer2.domElement );
-  controls.movementSpeed = 5;
+  controls.movementSpeed = 2;
   controls.lookSpeed = 0.08;
   controls.lookVertical = false;
 
@@ -62,7 +81,7 @@ function startStoreRoom() {
   // Load the GLTF Scene I created
   // --------------------------------------------------------------------------------
 
-  const loader = new GLTFLoader();
+  const loader = new GLTFLoader(loadingManager);
   loader.load(
     "../img/hgarage.glb",
     (gltf) => {
@@ -194,6 +213,11 @@ function startStoreRoom() {
     homeMesh.position.copy( camera.position );
     homeMesh.updateMatrix();
     homeMesh.translateZ( - 2 );
+  }
+  function onTransitionEnd(event) {
+
+    event.target.remove();
+  
   }
 
 }

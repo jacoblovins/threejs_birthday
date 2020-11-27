@@ -13,10 +13,21 @@ function startTown() {
   // --------------------------------------------------------------------------------
   // Initial scene setup and render to the HTML page
   // --------------------------------------------------------------------------------
-  
+
   const clock = new THREE.Clock();
 
   const scene = new THREE.Scene();
+
+
+  const loadingManager = new THREE.LoadingManager(() => {
+
+    const loadingScreen = document.getElementById('loading-screen');
+    loadingScreen.classList.add('fade-out');
+
+    // optional: remove loader from DOM via event listener
+    loadingScreen.addEventListener('transitionend', onTransitionEnd);
+
+  });
 
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.z = 8;
@@ -27,7 +38,7 @@ function startTown() {
   document.body.appendChild(renderer.domElement);
 
   const domEvents = new THREEx.DomEvents(camera, renderer.domElement);
-  document.body.appendChild( VRButton.createButton( renderer ) );
+  document.body.appendChild(VRButton.createButton(renderer));
   renderer.xr.enabled = true;
 
   // --------------------------------------------------------------------------------
@@ -57,7 +68,7 @@ function startTown() {
   // Load the GLTF Scene I created
   // --------------------------------------------------------------------------------
 
-  const loader = new GLTFLoader();
+  const loader = new GLTFLoader(loadingManager);
   loader.load(
     "../img/henrys.glb",
     (gltf) => {
@@ -133,7 +144,7 @@ function startTown() {
   // Chick Fil A sign
   // --------------------------------------------------------------------------------  
 
-  const texture = new THREE.TextureLoader().load( '../../img/logo.jpg' );
+  const texture = new THREE.TextureLoader().load('../../img/logo.jpg');
   const chickMaterial = new THREE.MeshBasicMaterial({ map: texture });
   const chickGeometry = new THREE.PlaneGeometry(3.3, 1.9, 1);
   const chickMesh = new THREE.Mesh(chickGeometry, chickMaterial);
@@ -214,31 +225,36 @@ function startTown() {
   // --------------------------------------------------------------------------------
   // Render all the above code every time the screen refreshes (hopefully 60fps)
   // --------------------------------------------------------------------------------
-  
+
   const render = function () {
     if (camera.position.x < -8) {
       camera.position.x = -8;
     } else if (camera.position.x > 15.5) {
       camera.position.x = 15.5;
-    } else if (camera.position.z > 11) {
-      camera.position.z = 11;
-    } else if (camera.position.z < -30) {
-      camera.position.z = -30;
+    } else if (camera.position.z > 17) {
+      camera.position.z = 17;
+    } else if (camera.position.z < -10) {
+      camera.position.z = -10;
     } else if (camera.position.y < 2 || camera.position.y > 2) {
       camera.position.y = 2;
     }
 
     controls.update(clock.getDelta());
     renderer.render(scene, camera);
-    mouseMesh.rotation.copy( camera.rotation );
-    mouseMesh.position.copy( camera.position );
+    mouseMesh.rotation.copy(camera.rotation);
+    mouseMesh.position.copy(camera.position);
     mouseMesh.updateMatrix();
-    mouseMesh.translateZ( - 2 );
+    mouseMesh.translateZ(- 2);
     // stats.update();
   };
-  
+
   renderer.setAnimationLoop(render);
-  // render();
+
+  function onTransitionEnd(event) {
+  
+    event.target.remove();
+  
+  }
 }
 startTown();
 
